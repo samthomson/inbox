@@ -39,4 +39,16 @@ describe('Inbox', () => {
         assert.equal(message, initialMessageString)
     })
 
+    it('sets a message', async () => {
+        const newMessageContent = 'send this new message'
+        await inbox.methods.setMessage(newMessageContent).send(
+            {
+                from: accounts[0]
+            }
+        )
+
+        const currentMessage = await inbox.methods.message().call()
+        assert.equal(currentMessage, newMessageContent)
+    })
+
 })
